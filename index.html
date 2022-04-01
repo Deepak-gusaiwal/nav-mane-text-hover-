@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu Hover Text Animation Effects</title>
+</head>
+<style>
+    *,
+    *::before,
+    *::after {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    ul {
+        list-style: none;
+    }
+
+    a {
+        color: inherit;
+        text-decoration: none;
+    }
+
+    
+
+    body {
+        height: 100vh;
+    }
+    nav {
+        background-color: rgb(87, 87, 87);
+        text-transform: capitalize;
+    }
+    ul {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        gap: 1rem;
+        align-items: center;
+        font-size:1.5rem;
+        padding: 1rem 0;
+    }
+
+    ul li a {
+        letter-spacing: 2px;
+        color: transparent;
+        position: relative;
+        font-weight: 700;
+        z-index: 1;
+        overflow: hidden;
+        -webkit-text-stroke: 1px var(--clr);
+    }
+
+    ul li a::before {
+        content: attr(data-text);
+        position: absolute;
+        width: 0%;
+        overflow: hidden;
+        transition: 200ms;
+        z-index: -1;
+        color: var(--clr);
+        border-right: 0.4rem solid var(--clr);
+    }
+    
+    ul li a:hover::before {
+        filter: drop-shadow(0 0 25px var(--clr));
+        width: 100%;
+    }
+    ul li a.active::before {
+        content: attr(data-text);
+        position: absolute;
+        overflow: hidden;
+        transition: 200ms;
+        z-index: -1;
+        color: var(--clr);
+        border-right: 0.4rem solid var(--clr);
+        filter: drop-shadow(0 0 50px var(--clr));
+        width: 100%;
+    }
+    
+   
+</style>
+
+<body>
+    <nav>
+        <ul class="menu">
+            <li style="--clr:#ee4035 "><a class="active" data-text="&nbsp;Home">&nbsp;home&nbsp;</a></li>
+            <li style="--clr:#f37736 "><a data-text="&nbsp;About">&nbsp;About&nbsp;</a></li>
+            <li style="--clr:#fed766"><a data-text="&nbsp;Services">&nbsp;services&nbsp;</a></li>
+            <li style="--clr:#7bc043  "><a data-text="&nbsp;Gallery">&nbsp;gallery&nbsp;</a></li>
+            <li style="--clr:#0392cf"><a data-text="&nbsp;Contact">&nbsp;contact&nbsp;</a></li>
+        </ul>
+    </nav>
+
+    <script>
+        let links = [...document.querySelectorAll('.menu li a')];
+        links.forEach((link)=>{
+            link.addEventListener('click',()=>{
+                let active = document.querySelector('a.active');
+                active.classList.remove('active');
+                link.classList.add('active');
+            });
+        });
+        console.log(links);
+    </script>
+</body>
+
+</html>
